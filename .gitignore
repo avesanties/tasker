@@ -7,3 +7,7 @@ target
 .project
 .settings
 bin
+
+# IntelliJ IDEA
+*.iml
+.idea
