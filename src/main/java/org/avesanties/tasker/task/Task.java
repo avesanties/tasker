@@ -11,8 +11,9 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
 
+
 @Entity
-@Table(name = "Tasks")
+@Table(name = "tasks")
 public class Task {
 
   @Id
@@ -20,10 +21,10 @@ public class Task {
   private Long id;
 
   @NotEmpty
-  @Column(length = 255, nullable = false)
+  @Column(nullable = false)
   private String name;
 
-  @Column(length = 255)
+  @Column
   private String description;
 
   @NotNull
@@ -39,7 +40,7 @@ public class Task {
 
   }
 
-  public Task(String name, String description, States state, LocalDate date) {
+  public Task(String name, String description, @NotNull States state, @NotNull LocalDate date) {
     this.name = name;
     this.date = date;
     this.state = state;
@@ -62,19 +63,19 @@ public class Task {
     this.description = description;
   }
 
-  public States getState() {
+  public @NotNull States getState() {
     return state;
   }
 
-  public void setState(States state) {
+  public void setState(@NotNull States state) {
     this.state = state;
   }
 
-  public LocalDate getDate() {
+  public @NotNull LocalDate getDate() {
     return date;
   }
 
-  public void setDate(LocalDate date) {
+  public void setDate(@NotNull LocalDate date) {
     this.date = date;
   }
 
@@ -88,3 +89,5 @@ public class Task {
         + ", date=" + date + "]";
   }
 }
+
+

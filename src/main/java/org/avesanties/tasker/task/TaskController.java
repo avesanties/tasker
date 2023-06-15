@@ -16,11 +16,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/api/v1")
 public class TaskController {
 
   private final TaskRepository tasks;
@@ -39,7 +41,6 @@ public class TaskController {
     }
 
     return tasks.save(task);
-
   }
 
   @GetMapping("/tasks")
@@ -63,7 +64,6 @@ public class TaskController {
   public List<Task> getAllTasks() {
 
     return tasks.findAll();
-
   }
 
   @GetMapping("/tasks/{id}")
@@ -86,22 +86,13 @@ public class TaskController {
       task.setState(newTask.getState());
       task.setDate(newTask.getDate());
       return tasks.save(task);
-    }).orElseGet(() -> {
-      return tasks.save(newTask);
-    });
+    }).orElseGet(() ->
+        tasks.save(newTask)
+    );
   }
 
   @DeleteMapping("/tasks/{id}")
   public void deleteTask(@PathVariable(name = "id") long id) {
     tasks.deleteById(id);
-  }
-
-  @GetMapping("/")
-  public String index() {
-    return "<!DOCTYPE html>\n" + "<html>\n" + "<head>\n" + "<title>\n" + "</title>\n"
-        + "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n" + "</head>\n"
-        + "<body>\n" + "<h1>Tasker</h1>\n"
-        + "<p>Simple REST service which supports basic CRUD operations.</p>\n" + "</body>\n"
-        + "</html>\n";
   }
 }

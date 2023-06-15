@@ -15,7 +15,7 @@ services:
       - SPRING_DATASOURCE_PASSWORD=12345
       - SPRING_JPA_HIBERNATE_DDL_AUTO=create
     ports:
-      - 8080:8080
+      - '8080:8080'
           
   db:
     image: 'postgres:15.3'
@@ -33,4 +33,4 @@ services:
       start_period: 10s
     restart: unless-stopped
     ports:
-      - 5432:5432
+      - '5432:5432'

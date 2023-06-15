@@ -9,16 +9,4 @@ public class ChronologicalOrderViolationException extends Exception {
   public ChronologicalOrderViolationException() {
     super();
   }
-
-  public ChronologicalOrderViolationException(String message) {
-    super(message);
-  }
-
-  public ChronologicalOrderViolationException(String message, Throwable cause) {
-    super(message, cause);
-  }
-
-  public ChronologicalOrderViolationException(Throwable cause) {
-    super(cause);
-  }
 }

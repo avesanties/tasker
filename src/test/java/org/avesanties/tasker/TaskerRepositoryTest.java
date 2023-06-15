@@ -16,17 +16,17 @@ class TaskerRepositoryTest extends TaskerApplicationTestConfiguration {
     createTasksTodo();
 
     assertAll(
-        () -> assertEquals(taskRepository.filterByDateOrderByAsc(LocalDate.now(),
-            LocalDate.now().plusDays(100L), Sort.by("name")).size(), 3),
-        () -> assertEquals(taskRepository.filterByDateOrderByAsc(LocalDate.now().minusDays(100L),
-            LocalDate.now().plusDays(100L), Sort.by("name")).size(), 6),
-        () -> assertEquals(taskRepository.filterByDateOrderByAsc(LocalDate.now().minusDays(3L),
-            LocalDate.now().plusDays(10L), Sort.by("name")).size(), 4),
-        () -> assertEquals(taskRepository
-            .filterByDateOrderByAsc(LocalDate.now(), LocalDate.now(), Sort.by("name")).size(), 1),
-        () -> assertEquals(taskRepository
+        () -> assertEquals(3, taskRepository.filterByDateOrderByAsc(LocalDate.now(),
+            LocalDate.now().plusDays(100L), Sort.by("name")).size()),
+        () -> assertEquals(6, taskRepository.filterByDateOrderByAsc(LocalDate.now().minusDays(100L),
+            LocalDate.now().plusDays(100L), Sort.by("name")).size()),
+        () -> assertEquals(4, taskRepository.filterByDateOrderByAsc(LocalDate.now().minusDays(3L),
+            LocalDate.now().plusDays(10L), Sort.by("name")).size()),
+        () -> assertEquals(1, taskRepository
+            .filterByDateOrderByAsc(LocalDate.now(), LocalDate.now(), Sort.by("name")).size()),
+        () -> assertEquals(0, taskRepository
             .filterByDateOrderByAsc(LocalDate.now(), LocalDate.now().minusDays(5L), Sort.by("name"))
-            .size(), 0));
+            .size()));
   }
 
   @Test
@@ -35,13 +35,11 @@ class TaskerRepositoryTest extends TaskerApplicationTestConfiguration {
     createTasksTodo();
 
     assertAll(
-        () -> assertEquals(taskRepository.filterByDateAndStateOrderByAsc(States.DONE,
-            LocalDate.now().minusDays(100L), LocalDate.now().plusDays(100L), Sort.by("name"))
-            .size(), 3),
-        () -> assertEquals(taskRepository.filterByDateAndStateOrderByAsc(States.TODO,
-            LocalDate.now().minusDays(100L), LocalDate.now().plusDays(100L), Sort.by("name"))
-            .size(), 3));
+        () -> assertEquals(3, taskRepository.filterByDateAndStateOrderByAsc(States.DONE,
+                LocalDate.now().minusDays(100L), LocalDate.now().plusDays(100L), Sort.by("name"))
+            .size()),
+        () -> assertEquals(3, taskRepository.filterByDateAndStateOrderByAsc(States.TODO,
+                LocalDate.now().minusDays(100L), LocalDate.now().plusDays(100L), Sort.by("name"))
+            .size()));
   }
-
-
 }
